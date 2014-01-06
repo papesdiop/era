@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SupplierEditDlg" widgetVar="SupplierEditDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.EditSupplierTitle}" closeOnEscape="true">
+
+            <h:form id="SupplierEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{supplierController.selected != null}">
+
+                        <h:outputLabel value="#{i118.EditSupplierLabel_id}" for="id" />
+                        <h:panelGroup>
+                            <h:outputText id="id" value="#{supplierController.selected.id}" />
+                            <p:tooltip for="id" value="#{supplierController.getComponentMessages('id', i118.EditSupplierHelpText_id)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditSupplierLabel_name}" for="name" />
+                        <h:panelGroup>
+                            <p:inputText id="name" value="#{supplierController.selected.name}" title="#{i118.EditSupplierTitle_name}" required="true" requiredMessage="#{i118.EditSupplierRequiredMessage_name}" size="45" maxlength="45"/>
+                            <p:tooltip for="name" value="#{supplierController.getComponentMessages('name', i118.EditSupplierHelpText_name)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditSupplierLabel_address}" for="address" />
+                        <h:panelGroup>
+                            <p:inputText id="address" value="#{supplierController.selected.address}" title="#{i118.EditSupplierTitle_address}" size="200" maxlength="200"/>
+                            <p:tooltip for="address" value="#{supplierController.getComponentMessages('address', i118.EditSupplierHelpText_address)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditSupplierLabel_phone}" for="phone" />
+                        <h:panelGroup>
+                            <p:inputText id="phone" value="#{supplierController.selected.phone}" title="#{i118.EditSupplierTitle_phone}" size="45" maxlength="45"/>
+                            <p:tooltip for="phone" value="#{supplierController.getComponentMessages('phone', i118.EditSupplierHelpText_phone)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditSupplierLabel_email}" for="email" />
+                        <h:panelGroup>
+                            <p:inputText id="email" value="#{supplierController.selected.email}" title="#{i118.EditSupplierTitle_email}" size="45" maxlength="45"/>
+                            <p:tooltip for="email" value="#{supplierController.getComponentMessages('email', i118.EditSupplierHelpText_email)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditSupplierLabel_userId}" for="userId" />
+                        <h:panelGroup>
+                            <p:inputText id="userId" value="#{supplierController.selected.userId}" title="#{i118.EditSupplierTitle_userId}" size="25" maxlength="25"/>
+                            <p:tooltip for="userId" value="#{supplierController.getComponentMessages('userId', i118.EditSupplierHelpText_userId)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{supplierController.save}" value="#{i118.Save}" update="display,:SupplierListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,SupplierEditDialog);"/>
+                    <p:commandButton value="#{i118.Cancel}" onclick="SupplierEditDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

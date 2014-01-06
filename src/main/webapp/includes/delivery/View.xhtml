@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DeliveryViewDlg" widgetVar="DeliveryViewDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.ViewDeliveryTitle}" closeOnEscape="true">
+
+            <h:form id="DeliveryViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{deliveryController.selected != null}">
+
+                        <h:outputText value="#{i118.ViewDeliveryLabel_id}"/>
+                        <h:outputText value="#{deliveryController.selected.id}" title="#{i118.ViewDeliveryTitle_id}"/>
+
+                        <h:outputText value="#{i118.ViewDeliveryLabel_deliveryDate}"/>
+                        <h:outputText value="#{deliveryController.selected.deliveryDate}" title="#{i118.ViewDeliveryTitle_deliveryDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="#{i118.ViewDeliveryLabel_delivered}"/>
+                        <h:selectBooleanCheckbox id="delivered" value="#{deliveryController.selected.delivered}" title="#{i118.EditDeliveryTitle_delivered}" required="true" requiredMessage="#{i118.EditDeliveryRequiredMessage_delivered}" disabled="true"/>
+
+                        <h:outputText value="#{i118.ViewDeliveryLabel_orderId}"/>
+                        <h:outputText value="#{deliveryController.selected.orderId.id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{i118.Close}" onclick="DeliveryViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

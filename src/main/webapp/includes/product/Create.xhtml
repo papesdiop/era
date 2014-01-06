@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProductCreateDlg" widgetVar="ProductCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.CreateProductTitle}" closeOnEscape="true">
+
+            <h:form id="ProductCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+
+                        <p:outputLabel value="#{i118.CreateProductLabel_name}" for="name" />
+                        <h:panelGroup>
+                            <p:inputText id="name" value="#{productController.selected.name}" title="#{i118.CreateProductTitle_name}" required="true" requiredMessage="#{i118.CreateProductRequiredMessage_name}" size="45" maxlength="45"/>
+                            <p:tooltip for="name" value="#{productController.getComponentMessages('name', i118.CreateProductHelpText_name)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateProductLabel_quantity}" for="quantity" />
+                        <h:panelGroup>
+                            <p:inputText id="quantity" value="#{productController.selected.quantity}" title="#{i118.CreateProductTitle_quantity}"/>
+                            <p:tooltip for="quantity" value="#{productController.getComponentMessages('quantity', i118.CreateProductHelpText_quantity)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateProductLabel_alertQuantity}" for="alertQuantity" />
+                        <h:panelGroup>
+                            <p:inputText id="alertQuantity" value="#{productController.selected.alertQuantity}" title="#{i118.CreateProductTitle_alertQuantity}"/>
+                            <p:tooltip for="alertQuantity" value="#{productController.getComponentMessages('alertQuantity', i118.CreateProductHelpText_alertQuantity)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateProductLabel_optimalQuantity}" for="optimalQuantity" />
+                        <h:panelGroup>
+                            <p:inputText id="optimalQuantity" value="#{productController.selected.optimalQuantity}" title="#{i118.CreateProductTitle_optimalQuantity}"/>
+                            <p:tooltip for="optimalQuantity" value="#{productController.getComponentMessages('optimalQuantity', i118.CreateProductHelpText_optimalQuantity)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateProductLabel_reference}" for="reference" />
+                        <h:panelGroup>
+                            <p:inputText id="reference" value="#{productController.selected.reference}" title="#{i118.CreateProductTitle_reference}" size="45" maxlength="45"/>
+                            <p:tooltip for="reference" value="#{productController.getComponentMessages('reference', i118.CreateProductHelpText_reference)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateProductLabel_image}" for="image" />
+                        <h:panelGroup>
+                            <p:inputText id="image" value="#{productController.selected.image}" title="#{i118.CreateProductTitle_image}" size="45" maxlength="45"/>
+                            <p:tooltip for="image" value="#{productController.getComponentMessages('image', i118.CreateProductHelpText_image)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateProductLabel_unitId}" for="unitId" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="unitId" value="#{productController.selected.unitId}" >
+                                <f:selectItem itemLabel="#{i118.SelectOneMessage}"/>
+                                <f:selectItems value="#{unitController.items}"
+                                               var="unitIdItem"
+                                               itemValue="#{unitIdItem}"
+                                               itemLabel="#{unitIdItem.name.toString()}"
+                                               />
+                                <f:converter binding="#{unitConverter}"/>
+                            </p:selectOneMenu>
+                            <p:tooltip for="unitId" value="#{productController.getComponentMessages('unitId', i118.CreateProductHelpText_unitId)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateProductLabel_subUnit}" for="subUnit" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="subUnit" value="#{productController.selected.subUnit}" >
+                                <f:selectItem itemLabel="#{i118.SelectOneMessage}"/>
+                                <f:selectItems value="#{productController.items}"
+                                               var="subUnitItem"
+                                               itemValue="#{subUnitItem}"
+                                               itemLabel="#{subUnitItem.name.toString()}"
+                                               />
+                                <f:converter binding="#{productConverter}"/>
+                            </p:selectOneMenu>
+                            <p:tooltip for="subUnit" value="#{productController.getComponentMessages('subUnit', i118.CreateProductHelpText_subUnit)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateProductLabel_categoryId}" for="categoryId" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="categoryId" value="#{productController.selected.categoryId}" >
+                                <f:selectItem itemLabel="#{i118.SelectOneMessage}"/>
+                                <f:selectItems value="#{categoryController.items}"
+                                               var="categoryIdItem"
+                                               itemValue="#{categoryIdItem}"
+                                               itemLabel="#{categoryIdItem.name.toString()}"
+                                               />
+                                <f:converter binding="#{categoryConverter}"/>
+                            </p:selectOneMenu>
+                            <p:tooltip for="categoryId" value="#{productController.getComponentMessages('categoryId', i118.CreateProductHelpText_categoryId)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{productController.saveNew}" value="#{i118.Save}" update="display,:ProductListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,ProductCreateDialog);"/>
+                    <p:commandButton value="#{i118.Cancel}" onclick="ProductCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

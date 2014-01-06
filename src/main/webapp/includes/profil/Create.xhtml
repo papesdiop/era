@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProfilCreateDlg" widgetVar="ProfilCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.CreateProfilTitle}" closeOnEscape="true">
+
+            <h:form id="ProfilCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+
+                        <p:outputLabel value="#{i118.CreateProfilLabel_id}" for="id" />
+                        <h:panelGroup>
+                            <p:inputText id="id" value="#{profilController.selected.id}" title="#{i118.CreateProfilTitle_id}" required="true" requiredMessage="#{i118.CreateProfilRequiredMessage_id}" size="25" maxlength="25"/>
+                            <p:tooltip for="id" value="#{profilController.getComponentMessages('id', i118.CreateProfilHelpText_id)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateProfilLabel_name}" for="name" />
+                        <h:panelGroup>
+                            <p:inputText id="name" value="#{profilController.selected.name}" title="#{i118.CreateProfilTitle_name}" size="45" maxlength="45"/>
+                            <p:tooltip for="name" value="#{profilController.getComponentMessages('name', i118.CreateProfilHelpText_name)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{profilController.saveNew}" value="#{i118.Save}" update="display,:ProfilListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,ProfilCreateDialog);"/>
+                    <p:commandButton value="#{i118.Cancel}" onclick="ProfilCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

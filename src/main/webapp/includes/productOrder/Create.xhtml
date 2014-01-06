@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProductOrderCreateDlg" widgetVar="ProductOrderCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.CreateProductOrderTitle}" closeOnEscape="true">
+
+            <h:form id="ProductOrderCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+
+                        <p:outputLabel value="#{i118.CreateProductOrderLabel_develivered}" for="develivered" />
+                        <h:panelGroup>
+                            <p:selectBooleanCheckbox id="develivered" value="#{productOrderController.selected.develivered}" required="true" requiredMessage="#{i118.EditProductOrderRequiredMessage_develivered}"/>
+                            <p:tooltip for="develivered" value="#{productOrderController.getComponentMessages('develivered', i118.CreateProductOrderHelpText_develivered)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateProductOrderLabel_productId}" for="productId" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="productId" value="#{productOrderController.selected.productId}" required="true" requiredMessage="#{i118.EditProductOrderRequiredMessage_productId}">
+                                <f:selectItem itemLabel="#{i118.SelectOneMessage}"/>
+                                <f:selectItems value="#{productController.items}"
+                                               var="productIdItem"
+                                               itemValue="#{productIdItem}"
+                                               itemLabel="#{productIdItem.name.toString()}"
+                                               />
+                                <f:converter binding="#{productConverter}"/>
+                            </p:selectOneMenu>
+                            <p:tooltip for="productId" value="#{productOrderController.getComponentMessages('productId', i118.CreateProductOrderHelpText_productId)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateProductOrderLabel_orderId}" for="orderId" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="orderId" value="#{productOrderController.selected.orderId}" required="true" requiredMessage="#{i118.EditProductOrderRequiredMessage_orderId}">
+                                <f:selectItem itemLabel="#{i118.SelectOneMessage}"/>
+                                <f:selectItems value="#{ordersController.items}"
+                                               var="orderIdItem"
+                                               itemValue="#{orderIdItem}"
+                                               itemLabel="#{orderIdItem.id.toString()}"
+                                               />
+                                <f:converter binding="#{ordersConverter}"/>
+                            </p:selectOneMenu>
+                            <p:tooltip for="orderId" value="#{productOrderController.getComponentMessages('orderId', i118.CreateProductOrderHelpText_orderId)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{productOrderController.saveNew}" value="#{i118.Save}" update="display,:ProductOrderListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,ProductOrderCreateDialog);"/>
+                    <p:commandButton value="#{i118.Cancel}" onclick="ProductOrderCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProductOperationViewDlg" widgetVar="ProductOperationViewDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.ViewProductOperationTitle}" closeOnEscape="true">
+
+            <h:form id="ProductOperationViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{productOperationController.selected != null}">
+
+                        <h:outputText value="#{i118.ViewProductOperationLabel_id}"/>
+                        <h:outputText value="#{productOperationController.selected.id}" title="#{i118.ViewProductOperationTitle_id}"/>
+
+                        <h:outputText value="#{i118.ViewProductOperationLabel_operationId}"/>
+                        <h:outputText value="#{productOperationController.selected.operationId.id}"/>
+
+                        <h:outputText value="#{i118.ViewProductOperationLabel_productId}"/>
+                        <h:outputText value="#{productOperationController.selected.productId.name}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{i118.Close}" onclick="ProductOperationViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

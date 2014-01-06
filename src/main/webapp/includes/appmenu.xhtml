@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <h:form id="menuForm">
+            <p:menu>
+                <p:menuitem value="#{i118.Home}" outcome="/index" icon="ui-icon-home"/>
+                <p:submenu label="Stock">
+                    <p:menuitem value="Operations" outcome="/pages/operation/index" />
+                    <p:menuitem value="Employees" outcome="/pages/employee/index" />
+                </p:submenu>
+                
+                <p:submenu label="Suppliers">
+                    <p:menuitem value="Orders" outcome="/pages/orders/index" />
+                    <p:menuitem value="Deliveries" outcome="/pages/delivery/index" />
+                    <p:menuitem value="Suppliers" outcome="/pages/supplier/index" />
+                </p:submenu>
+                
+                <p:submenu label="Database">
+                    <p:menuitem value="Products" outcome="/pages/product/index" />
+                    <p:menuitem value="Suppliers" outcome="/pages/supplier/index" />
+                    <p:menuitem value="Categories" outcome="/pages/category/index" />
+                    <p:menuitem value="Units" outcome="/pages/unit/index" />
+                    <p:menuitem value="Employees" outcome="/pages/employee/index" />
+                    <p:menuitem value="Department" outcome="/pages/department/index" />
+                </p:submenu>
+                   
+                <p:submenu label="User Settings">
+                    <p:menuitem value="Themes" outcome="/pages/category/index" />
+                    <p:menuitem value="Password" outcome="/pages/category/index" />
+                </p:submenu>
+                
+                <p:submenu label="Reports">
+                    <p:menuitem value="Inventory" outcome="/pages/category/index" />
+                    <p:menuitem value="Others" outcome="/pages/category/index" />
+                </p:submenu>
+                
+                <p:submenu label="Administration">
+                    <p:menuitem value="Users" outcome="/pages/user/index" />
+                    <p:menuitem value="Backups" outcome="/pages/category/index" />
+                </p:submenu>
+
+                <p:submenu label="#{i118.Maintenance}" rendered="false">
+                    <p:menuitem value="Category" outcome="/pages/category/index" />
+                    <p:menuitem value="Delivery" outcome="/pages/delivery/index" />
+                    <p:menuitem value="Department" outcome="/pages/department/index" />
+                    <p:menuitem value="Employee" outcome="/pages/employee/index" />
+                    <p:menuitem value="Operation" outcome="/pages/operation/index" />
+                    <p:menuitem value="Orders" outcome="/pages/orders/index" />
+                    <p:menuitem value="Product" outcome="/pages/product/index" />
+                    <p:menuitem value="ProductOperation" outcome="/pages/productOperation/index" />
+                    <p:menuitem value="ProductOrder" outcome="/pages/productOrder/index" />
+                    <p:menuitem value="Profil" outcome="/pages/profil/index" />
+                    <p:menuitem value="Supplier" outcome="/pages/supplier/index" />
+                    <p:menuitem value="Unit" outcome="/pages/unit/index" />
+                    <p:menuitem value="User" outcome="/pages/user/index" />
+                </p:submenu>
+            </p:menu>
+        </h:form>
+    </ui:composition>
+
+</html>

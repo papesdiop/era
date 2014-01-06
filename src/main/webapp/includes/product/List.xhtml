@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="ProductListForm">
+
+        <p:panel header="#{i118.ListProductTitle}">
+
+            <p:dataTable id="datalist" value="#{productController.items}" var="item"
+                         selectionMode="single" selection="#{productController.selected}"
+                         rowKey="#{item.id}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30"
+                         >
+
+                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                    <f:facet name="header">
+                        <h:outputText value="#{i118.ListProductTitle_id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+                <p:column sortBy="#{item.name}" filterBy="#{item.name}">
+                    <f:facet name="header">
+                        <h:outputText value="#{i118.ListProductTitle_name}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.name}"/>
+                </p:column>
+                <p:column sortBy="#{item.quantity}" filterBy="#{item.quantity}">
+                    <f:facet name="header">
+                        <h:outputText value="#{i118.ListProductTitle_quantity}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.quantity}"/>
+                </p:column>
+                <p:column sortBy="#{item.alertQuantity}" filterBy="#{item.alertQuantity}">
+                    <f:facet name="header">
+                        <h:outputText value="#{i118.ListProductTitle_alertQuantity}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.alertQuantity}"/>
+                </p:column>
+                <p:column sortBy="#{item.optimalQuantity}" filterBy="#{item.optimalQuantity}">
+                    <f:facet name="header">
+                        <h:outputText value="#{i118.ListProductTitle_optimalQuantity}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.optimalQuantity}"/>
+                </p:column>
+                <p:column sortBy="#{item.reference}" filterBy="#{item.reference}">
+                    <f:facet name="header">
+                        <h:outputText value="#{i118.ListProductTitle_reference}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.reference}"/>
+                </p:column>
+                <p:column sortBy="#{item.image}" filterBy="#{item.image}">
+                    <f:facet name="header">
+                        <h:outputText value="#{i118.ListProductTitle_image}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.image}"/>
+                </p:column>
+                <p:column sortBy="#{item.unitId.name}" filterBy="#{item.unitId.name}">
+                    <f:facet name="header">
+                        <h:outputText value="#{i118.ListProductTitle_unitId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.unitId.name}"/>
+                </p:column>
+                <p:column sortBy="#{item.subUnit.name}" filterBy="#{item.subUnit.name}">
+                    <f:facet name="header">
+                        <h:outputText value="#{i118.ListProductTitle_subUnit}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.subUnit.name}"/>
+                </p:column>
+                <p:column sortBy="#{item.categoryId.name}" filterBy="#{item.categoryId.name}">
+                    <f:facet name="header">
+                        <h:outputText value="#{i118.ListProductTitle_categoryId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.categoryId.name}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <div class="footer-section">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{i118.Create}" actionListener="#{productController.prepareCreate}" update=":ProductCreateForm" oncomplete="ProductCreateDialog.show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{i118.View}" update=":ProductViewForm" oncomplete="ProductViewDialog.show()" disabled="#{empty productController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{i118.Edit}" update=":ProductEditForm" oncomplete="ProductEditDialog.show()" disabled="#{empty productController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{i118.Delete}" actionListener="#{productController.delete}" update=":growl,datalist" disabled="#{empty productController.selected}"/>
+                    </div>
+                </f:facet>
+
+            </p:dataTable>
+
+        </p:panel>
+
+    </h:form>
+
+</ui:composition>

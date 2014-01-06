@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserEditDlg" widgetVar="UserEditDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.EditUserTitle}" closeOnEscape="true">
+
+            <h:form id="UserEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{userController.selected != null}">
+
+                        <h:outputLabel value="#{i118.EditUserLabel_login}" for="login" />
+                        <h:panelGroup>
+                            <h:outputText id="login" value="#{userController.selected.login}" />
+                            <p:tooltip for="login" value="#{userController.getComponentMessages('login', i118.EditUserHelpText_login)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditUserLabel_name}" for="name" />
+                        <h:panelGroup>
+                            <p:inputText id="name" value="#{userController.selected.name}" title="#{i118.EditUserTitle_name}" required="true" requiredMessage="#{i118.EditUserRequiredMessage_name}" size="45" maxlength="45"/>
+                            <p:tooltip for="name" value="#{userController.getComponentMessages('name', i118.EditUserHelpText_name)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditUserLabel_email}" for="email" />
+                        <h:panelGroup>
+                            <p:inputText id="email" value="#{userController.selected.email}" title="#{i118.EditUserTitle_email}" size="45" maxlength="45"/>
+                            <p:tooltip for="email" value="#{userController.getComponentMessages('email', i118.EditUserHelpText_email)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditUserLabel_profilId}" for="profilId" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="profilId" value="#{userController.selected.profilId}" required="true" requiredMessage="#{i118.EditUserRequiredMessage_profilId}">
+                                <f:selectItem itemLabel="#{i118.SelectOneMessage}"/>
+                                <f:selectItems value="#{profilController.items}"
+                                               var="profilIdItem"
+                                               itemValue="#{profilIdItem}"
+                                               itemLabel="#{profilIdItem.name.toString()}"
+                                               />
+                                <f:converter binding="#{profilConverter}"/>
+                            </p:selectOneMenu>
+                            <p:tooltip for="profilId" value="#{userController.getComponentMessages('profilId', i118.EditUserHelpText_profilId)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{userController.save}" value="#{i118.Save}" update="display,:UserListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,UserEditDialog);"/>
+                    <p:commandButton value="#{i118.Cancel}" onclick="UserEditDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

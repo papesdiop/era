@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SupplierViewDlg" widgetVar="SupplierViewDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.ViewSupplierTitle}" closeOnEscape="true">
+
+            <h:form id="SupplierViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{supplierController.selected != null}">
+
+                        <h:outputText value="#{i118.ViewSupplierLabel_id}"/>
+                        <h:outputText value="#{supplierController.selected.id}" title="#{i118.ViewSupplierTitle_id}"/>
+
+                        <h:outputText value="#{i118.ViewSupplierLabel_name}"/>
+                        <h:outputText value="#{supplierController.selected.name}" title="#{i118.ViewSupplierTitle_name}"/>
+
+                        <h:outputText value="#{i118.ViewSupplierLabel_address}"/>
+                        <h:outputText value="#{supplierController.selected.address}" title="#{i118.ViewSupplierTitle_address}"/>
+
+                        <h:outputText value="#{i118.ViewSupplierLabel_phone}"/>
+                        <h:outputText value="#{supplierController.selected.phone}" title="#{i118.ViewSupplierTitle_phone}"/>
+
+                        <h:outputText value="#{i118.ViewSupplierLabel_email}"/>
+                        <h:outputText value="#{supplierController.selected.email}" title="#{i118.ViewSupplierTitle_email}"/>
+
+                        <h:outputText value="#{i118.ViewSupplierLabel_userId}"/>
+                        <h:outputText value="#{supplierController.selected.userId}" title="#{i118.ViewSupplierTitle_userId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{i118.Close}" onclick="SupplierViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

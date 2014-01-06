@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrdersViewDlg" widgetVar="OrdersViewDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.ViewOrdersTitle}" closeOnEscape="true">
+
+            <h:form id="OrdersViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ordersController.selected != null}">
+
+                        <h:outputText value="#{i118.ViewOrdersLabel_id}"/>
+                        <h:outputText value="#{ordersController.selected.id}" title="#{i118.ViewOrdersTitle_id}"/>
+
+                        <h:outputText value="#{i118.ViewOrdersLabel_label}"/>
+                        <h:outputText value="#{ordersController.selected.label}" title="#{i118.ViewOrdersTitle_label}"/>
+
+                        <h:outputText value="#{i118.ViewOrdersLabel_summary}"/>
+                        <h:outputText value="#{ordersController.selected.summary}" title="#{i118.ViewOrdersTitle_summary}"/>
+
+                        <h:outputText value="#{i118.ViewOrdersLabel_orderDate}"/>
+                        <h:outputText value="#{ordersController.selected.orderDate}" title="#{i118.ViewOrdersTitle_orderDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="#{i118.ViewOrdersLabel_reference}"/>
+                        <h:outputText value="#{ordersController.selected.reference}" title="#{i118.ViewOrdersTitle_reference}"/>
+
+                        <h:outputText value="#{i118.ViewOrdersLabel_userId}"/>
+                        <h:outputText value="#{ordersController.selected.userId.name}"/>
+
+                        <h:outputText value="#{i118.ViewOrdersLabel_supplierId}"/>
+                        <h:outputText value="#{ordersController.selected.supplierId.name}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{i118.Close}" onclick="OrdersViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

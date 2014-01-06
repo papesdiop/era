@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UnitCreateDlg" widgetVar="UnitCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.CreateUnitTitle}" closeOnEscape="true">
+
+            <h:form id="UnitCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+
+                        <p:outputLabel value="#{i118.CreateUnitLabel_id}" for="id" />
+                        <h:panelGroup>
+                            <p:inputText id="id" value="#{unitController.selected.id}" title="#{i118.CreateUnitTitle_id}" required="true" requiredMessage="#{i118.CreateUnitRequiredMessage_id}" size="25" maxlength="25"/>
+                            <p:tooltip for="id" value="#{unitController.getComponentMessages('id', i118.CreateUnitHelpText_id)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateUnitLabel_name}" for="name" />
+                        <h:panelGroup>
+                            <p:inputText id="name" value="#{unitController.selected.name}" title="#{i118.CreateUnitTitle_name}" size="45" maxlength="45"/>
+                            <p:tooltip for="name" value="#{unitController.getComponentMessages('name', i118.CreateUnitHelpText_name)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateUnitLabel_quantity}" for="quantity" />
+                        <h:panelGroup>
+                            <p:inputText id="quantity" value="#{unitController.selected.quantity}" title="#{i118.CreateUnitTitle_quantity}"/>
+                            <p:tooltip for="quantity" value="#{unitController.getComponentMessages('quantity', i118.CreateUnitHelpText_quantity)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{unitController.saveNew}" value="#{i118.Save}" update="display,:UnitListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,UnitCreateDialog);"/>
+                    <p:commandButton value="#{i118.Cancel}" onclick="UnitCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

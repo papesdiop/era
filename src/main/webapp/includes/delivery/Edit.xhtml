@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DeliveryEditDlg" widgetVar="DeliveryEditDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.EditDeliveryTitle}" closeOnEscape="true">
+
+            <h:form id="DeliveryEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{deliveryController.selected != null}">
+
+                        <h:outputLabel value="#{i118.EditDeliveryLabel_id}" for="id" />
+                        <h:panelGroup>
+                            <h:outputText id="id" value="#{deliveryController.selected.id}" />
+                            <p:tooltip for="id" value="#{deliveryController.getComponentMessages('id', i118.EditDeliveryHelpText_id)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditDeliveryLabel_deliveryDate}" for="deliveryDate" />
+                        <h:panelGroup>
+                            <p:calendar id="deliveryDate" pattern="MM/dd/yyyy" value="#{deliveryController.selected.deliveryDate}" title="#{i118.EditDeliveryTitle_deliveryDate}" required="true" requiredMessage="#{i118.EditDeliveryRequiredMessage_deliveryDate}" showOn="button"/>
+                            <p:tooltip for="deliveryDate" value="#{deliveryController.getComponentMessages('deliveryDate', i118.EditDeliveryHelpText_deliveryDate)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditDeliveryLabel_delivered}" for="delivered" />
+                        <h:panelGroup>
+                            <p:selectBooleanCheckbox id="delivered" value="#{deliveryController.selected.delivered}" required="true" requiredMessage="#{i118.EditDeliveryRequiredMessage_delivered}"/>
+                            <p:tooltip for="delivered" value="#{deliveryController.getComponentMessages('delivered', i118.EditDeliveryHelpText_delivered)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditDeliveryLabel_orderId}" for="orderId" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="orderId" value="#{deliveryController.selected.orderId}" required="true" requiredMessage="#{i118.EditDeliveryRequiredMessage_orderId}">
+                                <f:selectItem itemLabel="#{i118.SelectOneMessage}"/>
+                                <f:selectItems value="#{ordersController.items}"
+                                               var="orderIdItem"
+                                               itemValue="#{orderIdItem}"
+                                               itemLabel="#{orderIdItem.id.toString()}"
+                                               />
+                                <f:converter binding="#{ordersConverter}"/>
+                            </p:selectOneMenu>
+                            <p:tooltip for="orderId" value="#{deliveryController.getComponentMessages('orderId', i118.EditDeliveryHelpText_orderId)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{deliveryController.save}" value="#{i118.Save}" update="display,:DeliveryListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,DeliveryEditDialog);"/>
+                    <p:commandButton value="#{i118.Cancel}" onclick="DeliveryEditDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

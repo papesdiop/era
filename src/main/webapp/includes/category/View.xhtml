@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CategoryViewDlg" widgetVar="CategoryViewDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.ViewCategoryTitle}" closeOnEscape="true">
+
+            <h:form id="CategoryViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{categoryController.selected != null}">
+
+                        <h:outputText value="#{i118.ViewCategoryLabel_id}"/>
+                        <h:outputText value="#{categoryController.selected.id}" title="#{i118.ViewCategoryTitle_id}"/>
+
+                        <h:outputText value="#{i118.ViewCategoryLabel_name}"/>
+                        <h:outputText value="#{categoryController.selected.name}" title="#{i118.ViewCategoryTitle_name}"/>
+
+                        <h:outputText value="#{i118.ViewCategoryLabel_summary}"/>
+                        <h:outputText value="#{categoryController.selected.summary}" title="#{i118.ViewCategoryTitle_summary}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{i118.Close}" onclick="CategoryViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

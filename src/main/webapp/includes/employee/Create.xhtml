@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EmployeeCreateDlg" widgetVar="EmployeeCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.CreateEmployeeTitle}" closeOnEscape="true">
+
+            <h:form id="EmployeeCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+
+                        <p:outputLabel value="#{i118.CreateEmployeeLabel_name}" for="name" />
+                        <h:panelGroup>
+                            <p:inputText id="name" value="#{employeeController.selected.name}" title="#{i118.CreateEmployeeTitle_name}" required="true" requiredMessage="#{i118.CreateEmployeeRequiredMessage_name}" size="25" maxlength="25"/>
+                            <p:tooltip for="name" value="#{employeeController.getComponentMessages('name', i118.CreateEmployeeHelpText_name)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateEmployeeLabel_jobPosition}" for="jobPosition" />
+                        <h:panelGroup>
+                            <p:inputText id="jobPosition" value="#{employeeController.selected.jobPosition}" title="#{i118.CreateEmployeeTitle_jobPosition}" size="45" maxlength="45"/>
+                            <p:tooltip for="jobPosition" value="#{employeeController.getComponentMessages('jobPosition', i118.CreateEmployeeHelpText_jobPosition)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateEmployeeLabel_departmentId}" for="departmentId" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="departmentId" value="#{employeeController.selected.departmentId}" required="true" requiredMessage="#{i118.EditEmployeeRequiredMessage_departmentId}">
+                                <f:selectItem itemLabel="#{i118.SelectOneMessage}"/>
+                                <f:selectItems value="#{departmentController.items}"
+                                               var="departmentIdItem"
+                                               itemValue="#{departmentIdItem}"
+                                               itemLabel="#{departmentIdItem.name.toString()}"
+                                               />
+                                <f:converter binding="#{departmentConverter}"/>
+                            </p:selectOneMenu>
+                            <p:tooltip for="departmentId" value="#{employeeController.getComponentMessages('departmentId', i118.CreateEmployeeHelpText_departmentId)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{employeeController.saveNew}" value="#{i118.Save}" update="display,:EmployeeListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,EmployeeCreateDialog);"/>
+                    <p:commandButton value="#{i118.Cancel}" onclick="EmployeeCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

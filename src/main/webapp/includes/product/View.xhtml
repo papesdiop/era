@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProductViewDlg" widgetVar="ProductViewDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.ViewProductTitle}" closeOnEscape="true">
+
+            <h:form id="ProductViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{productController.selected != null}">
+
+                        <h:outputText value="#{i118.ViewProductLabel_id}"/>
+                        <h:outputText value="#{productController.selected.id}" title="#{i118.ViewProductTitle_id}"/>
+
+                        <h:outputText value="#{i118.ViewProductLabel_name}"/>
+                        <h:outputText value="#{productController.selected.name}" title="#{i118.ViewProductTitle_name}"/>
+
+                        <h:outputText value="#{i118.ViewProductLabel_quantity}"/>
+                        <h:outputText value="#{productController.selected.quantity}" title="#{i118.ViewProductTitle_quantity}"/>
+
+                        <h:outputText value="#{i118.ViewProductLabel_alertQuantity}"/>
+                        <h:outputText value="#{productController.selected.alertQuantity}" title="#{i118.ViewProductTitle_alertQuantity}"/>
+
+                        <h:outputText value="#{i118.ViewProductLabel_optimalQuantity}"/>
+                        <h:outputText value="#{productController.selected.optimalQuantity}" title="#{i118.ViewProductTitle_optimalQuantity}"/>
+
+                        <h:outputText value="#{i118.ViewProductLabel_reference}"/>
+                        <h:outputText value="#{productController.selected.reference}" title="#{i118.ViewProductTitle_reference}"/>
+
+                        <h:outputText value="#{i118.ViewProductLabel_image}"/>
+                        <h:outputText value="#{productController.selected.image}" title="#{i118.ViewProductTitle_image}"/>
+
+                        <h:outputText value="#{i118.ViewProductLabel_unitId}"/>
+                        <h:outputText value="#{productController.selected.unitId.name}"/>
+
+                        <h:outputText value="#{i118.ViewProductLabel_subUnit}"/>
+                        <h:outputText value="#{productController.selected.subUnit.name}"/>
+
+                        <h:outputText value="#{i118.ViewProductLabel_categoryId}"/>
+                        <h:outputText value="#{productController.selected.categoryId.name}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{i118.Close}" onclick="ProductViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

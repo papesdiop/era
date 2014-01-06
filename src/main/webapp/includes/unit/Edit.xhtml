@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UnitEditDlg" widgetVar="UnitEditDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.EditUnitTitle}" closeOnEscape="true">
+
+            <h:form id="UnitEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{unitController.selected != null}">
+
+                        <h:outputLabel value="#{i118.EditUnitLabel_id}" for="id" />
+                        <h:panelGroup>
+                            <h:outputText id="id" value="#{unitController.selected.id}" />
+                            <p:tooltip for="id" value="#{unitController.getComponentMessages('id', i118.EditUnitHelpText_id)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditUnitLabel_name}" for="name" />
+                        <h:panelGroup>
+                            <p:inputText id="name" value="#{unitController.selected.name}" title="#{i118.EditUnitTitle_name}" size="45" maxlength="45"/>
+                            <p:tooltip for="name" value="#{unitController.getComponentMessages('name', i118.EditUnitHelpText_name)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditUnitLabel_quantity}" for="quantity" />
+                        <h:panelGroup>
+                            <p:inputText id="quantity" value="#{unitController.selected.quantity}" title="#{i118.EditUnitTitle_quantity}"/>
+                            <p:tooltip for="quantity" value="#{unitController.getComponentMessages('quantity', i118.EditUnitHelpText_quantity)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{unitController.save}" value="#{i118.Save}" update="display,:UnitListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,UnitEditDialog);"/>
+                    <p:commandButton value="#{i118.Cancel}" onclick="UnitEditDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

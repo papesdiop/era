@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProfilViewDlg" widgetVar="ProfilViewDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.ViewProfilTitle}" closeOnEscape="true">
+
+            <h:form id="ProfilViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{profilController.selected != null}">
+
+                        <h:outputText value="#{i118.ViewProfilLabel_id}"/>
+                        <h:outputText value="#{profilController.selected.id}" title="#{i118.ViewProfilTitle_id}"/>
+
+                        <h:outputText value="#{i118.ViewProfilLabel_name}"/>
+                        <h:outputText value="#{profilController.selected.name}" title="#{i118.ViewProfilTitle_name}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{i118.Close}" onclick="ProfilViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="OrdersListForm">
+
+        <p:panel header="#{i118.ListOrdersTitle}">
+
+            <p:dataTable id="datalist" value="#{ordersController.items}" var="item"
+                         selectionMode="single" selection="#{ordersController.selected}"
+                         rowKey="#{item.id}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30"
+                         >
+
+                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                    <f:facet name="header">
+                        <h:outputText value="#{i118.ListOrdersTitle_id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+                <p:column sortBy="#{item.label}" filterBy="#{item.label}">
+                    <f:facet name="header">
+                        <h:outputText value="#{i118.ListOrdersTitle_label}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.label}"/>
+                </p:column>
+                <p:column sortBy="#{item.summary}" filterBy="#{item.summary}">
+                    <f:facet name="header">
+                        <h:outputText value="#{i118.ListOrdersTitle_summary}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.summary}"/>
+                </p:column>
+                <p:column sortBy="#{item.orderDate}" filterBy="#{item.orderDate}">
+                    <f:facet name="header">
+                        <h:outputText value="#{i118.ListOrdersTitle_orderDate}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.orderDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column sortBy="#{item.reference}" filterBy="#{item.reference}">
+                    <f:facet name="header">
+                        <h:outputText value="#{i118.ListOrdersTitle_reference}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.reference}"/>
+                </p:column>
+                <p:column sortBy="#{item.userId.name}" filterBy="#{item.userId.name}">
+                    <f:facet name="header">
+                        <h:outputText value="#{i118.ListOrdersTitle_userId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.userId.name}"/>
+                </p:column>
+                <p:column sortBy="#{item.supplierId.name}" filterBy="#{item.supplierId.name}">
+                    <f:facet name="header">
+                        <h:outputText value="#{i118.ListOrdersTitle_supplierId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.supplierId.name}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <div class="footer-section">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{i118.Create}" actionListener="#{ordersController.prepareCreate}" update=":OrdersCreateForm" oncomplete="OrdersCreateDialog.show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{i118.View}" update=":OrdersViewForm" oncomplete="OrdersViewDialog.show()" disabled="#{empty ordersController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{i118.Edit}" update=":OrdersEditForm" oncomplete="OrdersEditDialog.show()" disabled="#{empty ordersController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{i118.Delete}" actionListener="#{ordersController.delete}" update=":growl,datalist" disabled="#{empty ordersController.selected}"/>
+                    </div>
+                </f:facet>
+
+            </p:dataTable>
+
+        </p:panel>
+
+    </h:form>
+
+</ui:composition>

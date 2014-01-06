@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProductOrderViewDlg" widgetVar="ProductOrderViewDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.ViewProductOrderTitle}" closeOnEscape="true">
+
+            <h:form id="ProductOrderViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{productOrderController.selected != null}">
+
+                        <h:outputText value="#{i118.ViewProductOrderLabel_id}"/>
+                        <h:outputText value="#{productOrderController.selected.id}" title="#{i118.ViewProductOrderTitle_id}"/>
+
+                        <h:outputText value="#{i118.ViewProductOrderLabel_develivered}"/>
+                        <h:selectBooleanCheckbox id="develivered" value="#{productOrderController.selected.develivered}" title="#{i118.EditProductOrderTitle_develivered}" required="true" requiredMessage="#{i118.EditProductOrderRequiredMessage_develivered}" disabled="true"/>
+
+                        <h:outputText value="#{i118.ViewProductOrderLabel_productId}"/>
+                        <h:outputText value="#{productOrderController.selected.productId.name}"/>
+
+                        <h:outputText value="#{i118.ViewProductOrderLabel_orderId}"/>
+                        <h:outputText value="#{productOrderController.selected.orderId.id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{i118.Close}" onclick="ProductOrderViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

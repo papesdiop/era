@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DepartmentCreateDlg" widgetVar="DepartmentCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.CreateDepartmentTitle}" closeOnEscape="true">
+
+            <h:form id="DepartmentCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+
+                        <p:outputLabel value="#{i118.CreateDepartmentLabel_name}" for="name" />
+                        <h:panelGroup>
+                            <p:inputText id="name" value="#{departmentController.selected.name}" title="#{i118.CreateDepartmentTitle_name}" required="true" requiredMessage="#{i118.CreateDepartmentRequiredMessage_name}" size="45" maxlength="45"/>
+                            <p:tooltip for="name" value="#{departmentController.getComponentMessages('name', i118.CreateDepartmentHelpText_name)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{departmentController.saveNew}" value="#{i118.Save}" update="display,:DepartmentListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,DepartmentCreateDialog);"/>
+                    <p:commandButton value="#{i118.Cancel}" onclick="DepartmentCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

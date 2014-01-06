@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProductEditDlg" widgetVar="ProductEditDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.EditProductTitle}" closeOnEscape="true">
+
+            <h:form id="ProductEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{productController.selected != null}">
+
+                        <h:outputLabel value="#{i118.EditProductLabel_id}" for="id" />
+                        <h:panelGroup>
+                            <h:outputText id="id" value="#{productController.selected.id}" />
+                            <p:tooltip for="id" value="#{productController.getComponentMessages('id', i118.EditProductHelpText_id)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditProductLabel_name}" for="name" />
+                        <h:panelGroup>
+                            <p:inputText id="name" value="#{productController.selected.name}" title="#{i118.EditProductTitle_name}" required="true" requiredMessage="#{i118.EditProductRequiredMessage_name}" size="45" maxlength="45"/>
+                            <p:tooltip for="name" value="#{productController.getComponentMessages('name', i118.EditProductHelpText_name)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditProductLabel_quantity}" for="quantity" />
+                        <h:panelGroup>
+                            <p:inputText id="quantity" value="#{productController.selected.quantity}" title="#{i118.EditProductTitle_quantity}"/>
+                            <p:tooltip for="quantity" value="#{productController.getComponentMessages('quantity', i118.EditProductHelpText_quantity)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditProductLabel_alertQuantity}" for="alertQuantity" />
+                        <h:panelGroup>
+                            <p:inputText id="alertQuantity" value="#{productController.selected.alertQuantity}" title="#{i118.EditProductTitle_alertQuantity}"/>
+                            <p:tooltip for="alertQuantity" value="#{productController.getComponentMessages('alertQuantity', i118.EditProductHelpText_alertQuantity)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditProductLabel_optimalQuantity}" for="optimalQuantity" />
+                        <h:panelGroup>
+                            <p:inputText id="optimalQuantity" value="#{productController.selected.optimalQuantity}" title="#{i118.EditProductTitle_optimalQuantity}"/>
+                            <p:tooltip for="optimalQuantity" value="#{productController.getComponentMessages('optimalQuantity', i118.EditProductHelpText_optimalQuantity)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditProductLabel_reference}" for="reference" />
+                        <h:panelGroup>
+                            <p:inputText id="reference" value="#{productController.selected.reference}" title="#{i118.EditProductTitle_reference}" size="45" maxlength="45"/>
+                            <p:tooltip for="reference" value="#{productController.getComponentMessages('reference', i118.EditProductHelpText_reference)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditProductLabel_image}" for="image" />
+                        <h:panelGroup>
+                            <p:inputText id="image" value="#{productController.selected.image}" title="#{i118.EditProductTitle_image}" size="45" maxlength="45"/>
+                            <p:tooltip for="image" value="#{productController.getComponentMessages('image', i118.EditProductHelpText_image)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditProductLabel_unitId}" for="unitId" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="unitId" value="#{productController.selected.unitId}" >
+                                <f:selectItem itemLabel="#{i118.SelectOneMessage}"/>
+                                <f:selectItems value="#{unitController.items}"
+                                               var="unitIdItem"
+                                               itemValue="#{unitIdItem}"
+                                               itemLabel="#{unitIdItem.name.toString()}"
+                                               />
+                                <f:converter binding="#{unitConverter}"/>
+                            </p:selectOneMenu>
+                            <p:tooltip for="unitId" value="#{productController.getComponentMessages('unitId', i118.EditProductHelpText_unitId)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditProductLabel_subUnit}" for="subUnit" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="subUnit" value="#{productController.selected.subUnit}" >
+                                <f:selectItem itemLabel="#{i118.SelectOneMessage}"/>
+                                <f:selectItems value="#{productController.items}"
+                                               var="subUnitItem"
+                                               itemValue="#{subUnitItem}"
+                                               itemLabel="#{subUnitItem.name.toString()}"
+                                               />
+                                <f:converter binding="#{productConverter}"/>
+                            </p:selectOneMenu>
+                            <p:tooltip for="subUnit" value="#{productController.getComponentMessages('subUnit', i118.EditProductHelpText_subUnit)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditProductLabel_categoryId}" for="categoryId" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="categoryId" value="#{productController.selected.categoryId}" >
+                                <f:selectItem itemLabel="#{i118.SelectOneMessage}"/>
+                                <f:selectItems value="#{categoryController.items}"
+                                               var="categoryIdItem"
+                                               itemValue="#{categoryIdItem}"
+                                               itemLabel="#{categoryIdItem.name.toString()}"
+                                               />
+                                <f:converter binding="#{categoryConverter}"/>
+                            </p:selectOneMenu>
+                            <p:tooltip for="categoryId" value="#{productController.getComponentMessages('categoryId', i118.EditProductHelpText_categoryId)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{productController.save}" value="#{i118.Save}" update="display,:ProductListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,ProductEditDialog);"/>
+                    <p:commandButton value="#{i118.Cancel}" onclick="ProductEditDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProductOperationEditDlg" widgetVar="ProductOperationEditDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.EditProductOperationTitle}" closeOnEscape="true">
+
+            <h:form id="ProductOperationEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{productOperationController.selected != null}">
+
+                        <h:outputLabel value="#{i118.EditProductOperationLabel_id}" for="id" />
+                        <h:panelGroup>
+                            <h:outputText id="id" value="#{productOperationController.selected.id}" />
+                            <p:tooltip for="id" value="#{productOperationController.getComponentMessages('id', i118.EditProductOperationHelpText_id)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditProductOperationLabel_operationId}" for="operationId" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="operationId" value="#{productOperationController.selected.operationId}" required="true" requiredMessage="#{i118.EditProductOperationRequiredMessage_operationId}">
+                                <f:selectItem itemLabel="#{i118.SelectOneMessage}"/>
+                                <f:selectItems value="#{operationController.items}"
+                                               var="operationIdItem"
+                                               itemValue="#{operationIdItem}"
+                                               itemLabel="#{operationIdItem.id.toString()}"
+                                               />
+                                <f:converter binding="#{operationConverter}"/>
+                            </p:selectOneMenu>
+                            <p:tooltip for="operationId" value="#{productOperationController.getComponentMessages('operationId', i118.EditProductOperationHelpText_operationId)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.EditProductOperationLabel_productId}" for="productId" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="productId" value="#{productOperationController.selected.productId}" required="true" requiredMessage="#{i118.EditProductOperationRequiredMessage_productId}">
+                                <f:selectItem itemLabel="#{i118.SelectOneMessage}"/>
+                                <f:selectItems value="#{productController.items}"
+                                               var="productIdItem"
+                                               itemValue="#{productIdItem}"
+                                               itemLabel="#{productIdItem.name.toString()}"
+                                               />
+                                <f:converter binding="#{productConverter}"/>
+                            </p:selectOneMenu>
+                            <p:tooltip for="productId" value="#{productOperationController.getComponentMessages('productId', i118.EditProductOperationHelpText_productId)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{productOperationController.save}" value="#{i118.Save}" update="display,:ProductOperationListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,ProductOperationEditDialog);"/>
+                    <p:commandButton value="#{i118.Cancel}" onclick="ProductOperationEditDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

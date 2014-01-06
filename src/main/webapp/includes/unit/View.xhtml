@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UnitViewDlg" widgetVar="UnitViewDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.ViewUnitTitle}" closeOnEscape="true">
+
+            <h:form id="UnitViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{unitController.selected != null}">
+
+                        <h:outputText value="#{i118.ViewUnitLabel_id}"/>
+                        <h:outputText value="#{unitController.selected.id}" title="#{i118.ViewUnitTitle_id}"/>
+
+                        <h:outputText value="#{i118.ViewUnitLabel_name}"/>
+                        <h:outputText value="#{unitController.selected.name}" title="#{i118.ViewUnitTitle_name}"/>
+
+                        <h:outputText value="#{i118.ViewUnitLabel_quantity}"/>
+                        <h:outputText value="#{unitController.selected.quantity}" title="#{i118.ViewUnitTitle_quantity}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{i118.Close}" onclick="UnitViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

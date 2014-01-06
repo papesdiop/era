@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OperationViewDlg" widgetVar="OperationViewDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.ViewOperationTitle}" closeOnEscape="true">
+
+            <h:form id="OperationViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{operationController.selected != null}">
+
+                        <h:outputText value="#{i118.ViewOperationLabel_id}"/>
+                        <h:outputText value="#{operationController.selected.id}" title="#{i118.ViewOperationTitle_id}"/>
+
+                        <h:outputText value="#{i118.ViewOperationLabel_summary}"/>
+                        <h:outputText value="#{operationController.selected.summary}" title="#{i118.ViewOperationTitle_summary}"/>
+
+                        <h:outputText value="#{i118.ViewOperationLabel_operationDate}"/>
+                        <h:outputText value="#{operationController.selected.operationDate}" title="#{i118.ViewOperationTitle_operationDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="#{i118.ViewOperationLabel_employeeId}"/>
+                        <h:outputText value="#{operationController.selected.employeeId.name}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{i118.Close}" onclick="OperationViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

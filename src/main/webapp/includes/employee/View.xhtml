@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EmployeeViewDlg" widgetVar="EmployeeViewDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.ViewEmployeeTitle}" closeOnEscape="true">
+
+            <h:form id="EmployeeViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{employeeController.selected != null}">
+
+                        <h:outputText value="#{i118.ViewEmployeeLabel_id}"/>
+                        <h:outputText value="#{employeeController.selected.id}" title="#{i118.ViewEmployeeTitle_id}"/>
+
+                        <h:outputText value="#{i118.ViewEmployeeLabel_name}"/>
+                        <h:outputText value="#{employeeController.selected.name}" title="#{i118.ViewEmployeeTitle_name}"/>
+
+                        <h:outputText value="#{i118.ViewEmployeeLabel_jobPosition}"/>
+                        <h:outputText value="#{employeeController.selected.jobPosition}" title="#{i118.ViewEmployeeTitle_jobPosition}"/>
+
+                        <h:outputText value="#{i118.ViewEmployeeLabel_departmentId}"/>
+                        <h:outputText value="#{employeeController.selected.departmentId.name}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{i118.Close}" onclick="EmployeeViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

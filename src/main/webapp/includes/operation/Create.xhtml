@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OperationCreateDlg" widgetVar="OperationCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.CreateOperationTitle}" closeOnEscape="true">
+
+            <h:form id="OperationCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+
+                        <p:outputLabel value="#{i118.CreateOperationLabel_summary}" for="summary" />
+                        <h:panelGroup>
+                            <p:inputText id="summary" value="#{operationController.selected.summary}" title="#{i118.CreateOperationTitle_summary}" size="300" maxlength="300"/>
+                            <p:tooltip for="summary" value="#{operationController.getComponentMessages('summary', i118.CreateOperationHelpText_summary)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateOperationLabel_operationDate}" for="operationDate" />
+                        <h:panelGroup>
+                            <p:calendar id="operationDate" pattern="MM/dd/yyyy" value="#{operationController.selected.operationDate}" title="#{i118.EditOperationTitle_operationDate}"  showOn="button"/>
+                            <p:tooltip for="operationDate" value="#{operationController.getComponentMessages('operationDate', i118.CreateOperationHelpText_operationDate)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateOperationLabel_employeeId}" for="employeeId" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="employeeId" value="#{operationController.selected.employeeId}" >
+                                <f:selectItem itemLabel="#{i118.SelectOneMessage}"/>
+                                <f:selectItems value="#{employeeController.items}"
+                                               var="employeeIdItem"
+                                               itemValue="#{employeeIdItem}"
+                                               itemLabel="#{employeeIdItem.name.toString()}"
+                                               />
+                                <f:converter binding="#{employeeConverter}"/>
+                            </p:selectOneMenu>
+                            <p:tooltip for="employeeId" value="#{operationController.getComponentMessages('employeeId', i118.CreateOperationHelpText_employeeId)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{operationController.saveNew}" value="#{i118.Save}" update="display,:OperationListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,OperationCreateDialog);"/>
+                    <p:commandButton value="#{i118.Cancel}" onclick="OperationCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrdersCreateDlg" widgetVar="OrdersCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.CreateOrdersTitle}" closeOnEscape="true">
+
+            <h:form id="OrdersCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+
+                        <p:outputLabel value="#{i118.CreateOrdersLabel_label}" for="label" />
+                        <h:panelGroup>
+                            <p:inputText id="label" value="#{ordersController.selected.label}" title="#{i118.CreateOrdersTitle_label}" size="45" maxlength="45"/>
+                            <p:tooltip for="label" value="#{ordersController.getComponentMessages('label', i118.CreateOrdersHelpText_label)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateOrdersLabel_summary}" for="summary" />
+                        <h:panelGroup>
+                            <p:inputText id="summary" value="#{ordersController.selected.summary}" title="#{i118.CreateOrdersTitle_summary}" size="300" maxlength="300"/>
+                            <p:tooltip for="summary" value="#{ordersController.getComponentMessages('summary', i118.CreateOrdersHelpText_summary)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateOrdersLabel_orderDate}" for="orderDate" />
+                        <h:panelGroup>
+                            <p:calendar id="orderDate" pattern="MM/dd/yyyy" value="#{ordersController.selected.orderDate}" title="#{i118.EditOrdersTitle_orderDate}" required="true" requiredMessage="#{i118.EditOrdersRequiredMessage_orderDate}" showOn="button"/>
+                            <p:tooltip for="orderDate" value="#{ordersController.getComponentMessages('orderDate', i118.CreateOrdersHelpText_orderDate)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateOrdersLabel_reference}" for="reference" />
+                        <h:panelGroup>
+                            <p:inputText id="reference" value="#{ordersController.selected.reference}" title="#{i118.CreateOrdersTitle_reference}" size="45" maxlength="45"/>
+                            <p:tooltip for="reference" value="#{ordersController.getComponentMessages('reference', i118.CreateOrdersHelpText_reference)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateOrdersLabel_userId}" for="userId" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="userId" value="#{ordersController.selected.userId}" >
+                                <f:selectItem itemLabel="#{i118.SelectOneMessage}"/>
+                                <f:selectItems value="#{userController.items}"
+                                               var="userIdItem"
+                                               itemValue="#{userIdItem}"
+                                               itemLabel="#{userIdItem.name.toString()}"
+                                               />
+                                <f:converter binding="#{userConverter}"/>
+                            </p:selectOneMenu>
+                            <p:tooltip for="userId" value="#{ordersController.getComponentMessages('userId', i118.CreateOrdersHelpText_userId)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateOrdersLabel_supplierId}" for="supplierId" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="supplierId" value="#{ordersController.selected.supplierId}" >
+                                <f:selectItem itemLabel="#{i118.SelectOneMessage}"/>
+                                <f:selectItems value="#{supplierController.items}"
+                                               var="supplierIdItem"
+                                               itemValue="#{supplierIdItem}"
+                                               itemLabel="#{supplierIdItem.name.toString()}"
+                                               />
+                                <f:converter binding="#{supplierConverter}"/>
+                            </p:selectOneMenu>
+                            <p:tooltip for="supplierId" value="#{ordersController.getComponentMessages('supplierId', i118.CreateOrdersHelpText_supplierId)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ordersController.saveNew}" value="#{i118.Save}" update="display,:OrdersListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,OrdersCreateDialog);"/>
+                    <p:commandButton value="#{i118.Cancel}" onclick="OrdersCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

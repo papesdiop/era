@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CategoryCreateDlg" widgetVar="CategoryCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{i118.CreateCategoryTitle}" closeOnEscape="true">
+
+            <h:form id="CategoryCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+
+                        <p:outputLabel value="#{i118.CreateCategoryLabel_name}" for="name" />
+                        <h:panelGroup>
+                            <p:inputText id="name" value="#{categoryController.selected.name}" title="#{i118.CreateCategoryTitle_name}" size="45" maxlength="45"/>
+                            <p:tooltip for="name" value="#{categoryController.getComponentMessages('name', i118.CreateCategoryHelpText_name)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{i118.CreateCategoryLabel_summary}" for="summary" />
+                        <h:panelGroup>
+                            <p:inputText id="summary" value="#{categoryController.selected.summary}" title="#{i118.CreateCategoryTitle_summary}" size="300" maxlength="300"/>
+                            <p:tooltip for="summary" value="#{categoryController.getComponentMessages('summary', i118.CreateCategoryHelpText_summary)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{categoryController.saveNew}" value="#{i118.Save}" update="display,:CategoryListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,CategoryCreateDialog);"/>
+                    <p:commandButton value="#{i118.Cancel}" onclick="CategoryCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>
